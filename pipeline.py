@@ -1,3 +1,4 @@
+import os
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
@@ -8,12 +9,12 @@ from sklearn.metrics import classification_report, accuracy_score
 import joblib
 
 """
-Fonction pour executer le nettoyage des données jusqu'à
+Pipeline complet pour executer le nettoyage des données jusqu'à
 la sauvegarde du modèle de ML optimisé.
 """
 def pipeline():
     # Charger les données
-    filepath = "Airline_Dataset.csv"
+    filepath = os.path.join("..", "data", "Airline_Dataset.csv")
     data = pd.read_csv(filepath)
 
     # Étape 1 : Renommer les colonnes
@@ -55,7 +56,10 @@ def pipeline():
 
     # Étape 9 : Séparer les données en ensembles d'entraînement et de test
     X_train, X_test, y_train, y_test = train_test_split(
-        X, y, test_size=0.2, stratify=y, random_state=42
+        X, y,
+        test_size=0.2,
+        stratify=y,
+        random_state=42
     )
 
     # Étape 10 : Définir le modèle choisi avec ses hyperparamètres optimisés
